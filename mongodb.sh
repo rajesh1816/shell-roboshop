@@ -18,7 +18,7 @@ then
     echo -e "$R ERROR:: Please run this script with root access $N" | tee -a $LOG_FILE
     exit 1 #give other than 0 upto 127
 else
-    echo "$G You are running with root access $N" | tee -a $LOG_FILE
+    echo -e "$G You are running with root access $N" | tee -a $LOG_FILE
 fi
 
 # validate functions takes input as exit status, what command they tried to install
@@ -37,7 +37,7 @@ VALIDATE(){
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 VALIDATE $? "Copying mongodb repo"
 
-dnf install mongodb-org -y 
+dnf install mongodb-org -y &>>$LOGS_FOLDER
 VALIDATE $? "installing mongodb on server"
 
 systemctl enable mongod 
