@@ -85,6 +85,3 @@ VALIDATE $? "installing mongodb-client"
 
 mongosh --host mongodb.rajeshit.space </app/db/master-data.js &>>$LOG_FILE
 VALIDATE $? "loading data into catalogue"
-
-
-
