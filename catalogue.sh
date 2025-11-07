@@ -53,7 +53,7 @@ then
     VALIDATE $? "creating roboshop systemuser"
 else
     echo -e "$Y roboshop user is already existed..so skipping $N"
-
+fi
 
 mkdir /app 
 VALIDATE $? "creating app directory"
