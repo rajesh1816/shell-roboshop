@@ -45,8 +45,8 @@ dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "installing nodejs"
 
 
-id roboshop
-if [ $? -ne 0 ]
+SYSUSER=$(id roboshop)
+if [ $SYSUSER -ne 0 ]
 then
     echo -e " user is not existed ..$G so creating $N"
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
