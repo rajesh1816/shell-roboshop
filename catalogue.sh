@@ -35,13 +35,13 @@ VALIDATE(){
 
 
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>$LOG_FILE
 VALIDATE $? "diabling nodejs module"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y &>>$LOG_FILE
 VALIDATE $? "enabling the nodejs module"
 
-dnf install nodejs -y
+dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "installing nodejs"
 
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
@@ -50,33 +50,33 @@ VALIDATE $? "creating roboshop systemuser"
 mkdir /app 
 VALIDATE $? "creating app directory"
 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOG_FILE
 VALIDATE $? "downloading the catalogue zip file"
 
 cd /app 
-unzip /tmp/catalogue.zip
+unzip /tmp/catalogue.zip &>>$LOG_FILE
 VALIDATE $? "unzipping the zip file"
 
 
-npm install 
+npm install &>>$LOG_FILE
 VALIDATE $? "installing dependencies"
 
 
-cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service &>>$LOG_FILE
 VALIDATE $? "copying service file and creating systemctl"
 
-systemctl daemon-reload
+systemctl daemon-reload &>>$LOG_FILE
 systemctl enable catalogue 
-systemctl start catalogue
+systemctl start catalogue 
 VALIDATE $? "daemon-reload,enabling and starting the catalogue service"
 
-cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
 VALIDATE $? "copying mongod repo"
 
-dnf install mongodb-mongosh -y
+dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "installing mongodb-client"
 
-mongosh --host mongodb.rajeshit.space </app/db/master-data.js
+mongosh --host mongodb.rajeshit.space </app/db/master-data.js &>>$LOG_FILE
 VALIDATE $? "loading data into catalogue"
 
 
