@@ -75,9 +75,9 @@ VALIDATE $? "copying payment service file in /etc location for systemctl"
 systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "deamon-reload"
 
-systemctl enable cart &>>$LOG_FILE
-systemctl start cart
-VALIDATE $? "Enabling and starting the cart service"
+systemctl enable payment &>>$LOG_FILE
+systemctl start payment
+VALIDATE $? "Enabling and starting the payment service"
 
 SCRIPT_END=$(date +%s)
 TOTAL_TIME=$(($SCRIPT_END-$SCRIPT_START))
