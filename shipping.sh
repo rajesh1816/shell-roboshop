@@ -36,7 +36,7 @@ VALIDATE(){
 }
 
 
-dnf install maven -y
+dnf install maven -y &>>$LOG_FILE
 VALIDATE $? "installing maven"
 
 id roboshop &>>$LOG_FILE
@@ -64,7 +64,7 @@ unzip /tmp/shipping.zip &>>$LOG_FILE
 VALIDATE $? "unzipping the zip file"
 
 
-mvn clean package
+mvn clean package &>>$LOG_FILE
 VALIDATE $? "packaging the code"
 
 mv target/shipping-1.0.jar shipping.jar 
@@ -74,14 +74,14 @@ cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
 VALIDATE $? "copying shiiping service to /etc location for setting systemctl"
 
 
-systemctl daemon-reload
+systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "daemon-reload"
 
-systemctl enable shipping 
+systemctl enable shipping  &>>$LOG_FILE
 systemctl start shipping
 VALIDATE $? "Enabling and stating the shipping service"
 
-dnf install mysql -y 
+dnf install mysql -y &>>$LOG_FILE
 VALIDATE $? "installing mysql"
 
 
