@@ -63,17 +63,17 @@ unzip /tmp/dispatch.zip &>>$LOG_FILE
 VALIDATE $? "unzipping the dispatch zip file"
 
 
-go mod init dispatch
+go mod init dispatch &>>$LOG_FILE
 VALIDATE $? "starting a project"
 
-go get 
+go get &>>$LOG_FILE
 VALIDATE $? "adding dependencies"
 
 
-go build
+go build &>>$LOG_FILE
 VALIDATE $? "building the application"
 
-cp $SCRIPT_DIR/dispatch.service /etc/systemd/system/dispatch.service
+cp $SCRIPT_DIR/dispatch.service /etc/systemd/system/dispatch.service &>>$LOG_FILE
 VALIDATE $? "copying dispatch service file to /etc location for systemctl setup"
 
 
@@ -81,7 +81,7 @@ systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "deamon-reload"
 
 systemctl enable dispatch &>>$LOG_FILE
-systemctl start dispatch
+systemctl start dispatch &>>$LOG_FILE
 VALIDATE $? "Enabling and starting the dispatch service"
 
 SCRIPT_END=$(date +%s)
