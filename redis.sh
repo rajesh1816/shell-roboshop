@@ -57,4 +57,4 @@ VALIDATE $? "Enabling and starting mysql serice"
 
 SCRIPT_END=$(date +%s)
 TOTAL_TIME=$($SCRIPT_END-$SCRIPT_START)
-echo "Total time taken for installation: $G $TOTAL_TIME $N"
+echo -e "Total time taken for installation: $G $TOTAL_TIME $N"
