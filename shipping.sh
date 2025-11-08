@@ -24,6 +24,9 @@ else
     echo -e "$G You are running with root access $N" | tee -a $LOG_FILE
 fi
 
+echo "Enter the MYSQL root password"
+read -s MYSQL_ROOT_PASSWORD
+
 # validate functions takes input as exit status, what command they tried to install
 VALIDATE(){
     if [ $1 -eq 0 ]
