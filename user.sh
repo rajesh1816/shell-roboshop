@@ -81,7 +81,7 @@ VALIDATE $? "copying user.service file in /etc location for systemctl"
 systemctl daemon-reload
 VALIDATE $? "deamon-reload"
 
-systemctl enable user 
+systemctl enable user &>>$LOG_FILE
 systemctl start user
 VALIDATE $? "Enabling and starting the user service"
 
