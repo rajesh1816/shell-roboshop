@@ -48,3 +48,8 @@ VALIDATE $? "Enabling and stating the mysql service"
 
 mysql_secure_installation --set-root-pass $SQL_ROOT_PASSWORD
 VALIDATE $? "setting up sql root password"
+
+
+SCRIPT_END=$(date +%s)
+TOTAL_TIME=$(($SCRIPT_END-$SCRIPT_START))
+echo -e "Total time taken for installation: $G $TOTAL_TIME sec $N"
