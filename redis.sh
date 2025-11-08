@@ -49,7 +49,7 @@ sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected/ c protected-mode no' /etc/redi
 VALIDATE $? "changing local connection to remote connection and disabling protected mode"
 
 
-systemctl enable redis 
+systemctl enable redis &>>$LOG_FILE
 systemctl start redis 
 VALIDATE $? "Enabling and starting mysql serice"
 
