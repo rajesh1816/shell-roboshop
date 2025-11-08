@@ -67,7 +67,7 @@ VALIDATE $? "unzipping the zip file"
 mvn clean package &>>$LOG_FILE
 VALIDATE $? "packaging the code"
 
-mv target/shipping-1.0.jar shipping.jar 
+mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
 VALIDATE $? "moving and renaming the jar file"
 
 cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
@@ -78,7 +78,7 @@ systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "daemon-reload"
 
 systemctl enable shipping  &>>$LOG_FILE
-systemctl start shipping
+systemctl start shipping &>>$LOG_FILE
 VALIDATE $? "Enabling and stating the shipping service"
 
 dnf install mysql -y &>>$LOG_FILE
